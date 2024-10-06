@@ -255,4 +255,6 @@ docker-compose down --volumes
 Este instructivo te permite montar rápidamente una aplicación de votación sencilla sin el uso de frameworks, utilizando solo Python nativo, HTML, CSS y Docker para manejar el entorno de desarrollo. ¡Espero que te sea útil para aprender y practicar!
 
 
+---
 
+export PS1='\[\e[32m\]\u@\h:\[\e[34m\]\w\[\e[33m\] $(parse_git_branch)\[\e[0m\] $ '
