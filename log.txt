@@ -1,0 +1,188 @@
+gosorio@gosorio-X505BA:~/Votaciones feature1 $ ls -l
+total 20
+drwxrwxr-x 2 gosorio gosorio 4096 Oct  6 10:33 db
+drwxrwxr-x 2 gosorio gosorio 4096 Oct  6 10:33 nginx
+-rw-rw-r-- 1 gosorio gosorio 6897 Oct  6 09:16 README.md
+drwxrwxr-x 3 gosorio gosorio 4096 Oct  6 10:32 voting_app
+-rw-rw-r-- 1 gosorio gosorio    0 Oct  6 09:25 x
+gosorio@gosorio-X505BA:~/Votaciones feature1 $ mv db nginx voting_app/
+gosorio@gosorio-X505BA:~/Votaciones feature1 $ ls
+README.md  voting_app  x
+gosorio@gosorio-X505BA:~/Votaciones feature1 $ cd voting_app/
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ ls -l
+total 12
+drwxrwxr-x 4 gosorio gosorio 4096 Oct  6 10:32 app
+drwxrwxr-x 2 gosorio gosorio 4096 Oct  6 10:33 db
+drwxrwxr-x 2 gosorio gosorio 4096 Oct  6 10:33 nginx
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ pwd
+/home/gosorio/Votaciones/voting_app
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ ls
+app  db  nginx
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ touch app/main.py
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ touch app/templates/index.html
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ touch app/static/styles.css
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ touch db/init.sql
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ touch nginx/default.conf
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ touch docker-compose.yml
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ vi app/main.py
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ vi app/templates/index.html
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ vi app/static/styles.css
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ vi db/init.sql
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ vi nginx/default.conf
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ vi docker-compose.yml
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ vi app/Dockerfile
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ ls
+app  db  docker-compose.yml  nginx
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ docker-compose up --build
+permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get "http://%2Fvar%2Frun%2Fdocker.sock/v1.47/containers/json?all=1&filters=%7B%22label%22%3A%7B%22com.docker.compose.config-hash%22%3Atrue%2C%22com.docker.compose.project%3Dvoting_app%22%3Atrue%7D%7D": dial unix /var/run/docker.sock: connect: permission denied
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ sudo groupadd docker
+[sudo] password for gosorio: 
+groupadd: group 'docker' already exists
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ sudo usermod -aG docker ${USER}
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ su -s ${USER}
+Password: 
+su: Authentication failure
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ su -s ${USER}
+Password: 
+su: Authentication failure
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ echo su -s ${USER}
+su -s gosorio
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ passwd
+Changing password for gosorio.
+Current password: 
+New password: 
+BAD PASSWORD: The password is the same as the old one
+New password: 
+BAD PASSWORD: No password supplied
+New password: 
+BAD PASSWORD: No password supplied
+passwd: Have exhausted maximum number of retries for service
+passwd: password unchanged
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ whoami
+gosorio
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ who am i
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ who
+gosorio  seat0        2024-09-24 16:13 (login screen)
+gosorio  tty2         2024-09-24 16:13 (tty2)
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
+chown: cannot access '/home/gosorio/.docker': No such file or directory
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ pwd
+/home/gosorio/Votaciones/voting_app
+gosorio@gosorio-X505BA:~/Votaciones/voting_app feature1 $ sudo su -
+root@gosorio-X505BA:~# cd /home/gosorio/Votaciones/voting_app
+root@gosorio-X505BA:/home/gosorio/Votaciones/voting_app# docker-compose up --build
+[+] Running 11/1
+ ✔ db Pulled                                                                                                          867.8s 
+[+] Building 238.3s (8/8) FINISHED                                                                            docker:default
+ => [app internal] load build definition from Dockerfile                                                                2.0s
+ => => transferring dockerfile: 152B                                                                                    0.1s
+ => [app internal] load .dockerignore                                                                                   1.4s
+ => => transferring context: 2B                                                                                         0.0s
+ => [app internal] load metadata for docker.io/library/python:3.9-slim                                                  7.1s
+ => [app internal] load build context                                                                                   0.8s
+ => => transferring context: 2.91kB                                                                                     0.0s
+ => [app 1/4] FROM docker.io/library/python:3.9-slim@sha256:49f94609e5a997dc16086a66ac9664591854031d48e375945a9dbf4d  148.2s
+ => => resolve docker.io/library/python:3.9-slim@sha256:49f94609e5a997dc16086a66ac9664591854031d48e375945a9dbf4d1d53ab  0.5s
+ => => sha256:49f94609e5a997dc16086a66ac9664591854031d48e375945a9dbf4d1d53abbc 10.41kB / 10.41kB                        0.0s
+ => => sha256:93ab151da4e5310ea79c4ecf306ece628262b86a4d7a49cc601664f19fe44e36 1.75kB / 1.75kB                          0.0s
+ => => sha256:9d8cb7037cd8e90893e5f430ce4c048a872511e414580c7641675f2dad0a0351 5.20kB / 5.20kB                          0.0s
+ => => sha256:fdeeec85abbad3878f2008f9445f15a19a5a224d1b7e7715ac6b923072333e57 14.74MB / 14.74MB                       79.4s
+ => => sha256:4c0965d3919510b506d8856ebc050a96e996c7dae96e4fb420882dbe7e037e67 3.51MB / 3.51MB                         42.0s
+ => => sha256:302e3ee498053a7b5332ac79e8efebec16e900289fc1ecd1c754ce8fa047fcab 29.13MB / 29.13MB                      138.1s
+ => => sha256:62a08b8dd4f53ad5493dabf2af00ccde91abb3771fb2187040bcf2fe94a7ced7 248B / 248B                             44.1s
+ => => extracting sha256:302e3ee498053a7b5332ac79e8efebec16e900289fc1ecd1c754ce8fa047fcab                               2.2s
+ => => extracting sha256:4c0965d3919510b506d8856ebc050a96e996c7dae96e4fb420882dbe7e037e67                               0.2s
+ => => extracting sha256:fdeeec85abbad3878f2008f9445f15a19a5a224d1b7e7715ac6b923072333e57                               2.2s
+ => => extracting sha256:62a08b8dd4f53ad5493dabf2af00ccde91abb3771fb2187040bcf2fe94a7ced7                               0.0s
+ => [app 2/4] WORKDIR /app                                                                                              1.7s
+ => [app 3/4] COPY . /app                                                                                               0.8s
+ => ERROR [app 4/4] RUN pip install mysql-connector-python                                                             75.5s
+------
+ > [app 4/4] RUN pip install mysql-connector-python:
+10.66 Collecting mysql-connector-python
+11.09   Downloading mysql_connector_python-9.0.0-cp39-cp39-manylinux_2_17_x86_64.whl (19.3 MB)
+62.08      ━━                                       1.1/19.3 MB 16.6 kB/s eta 0:18:11
+62.41 ERROR: Exception:
+62.41 Traceback (most recent call last):
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_vendor/urllib3/response.py", line 438, in _error_catcher
+62.41     yield
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_vendor/urllib3/response.py", line 561, in read
+62.41     data = self._fp_read(amt) if not fp_closed else b""
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_vendor/urllib3/response.py", line 527, in _fp_read
+62.41     return self._fp.read(amt) if amt is not None else self._fp.read()
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_vendor/cachecontrol/filewrapper.py", line 90, in read
+62.41     data = self.__fp.read(amt)
+62.41   File "/usr/local/lib/python3.9/http/client.py", line 463, in read
+62.41     n = self.readinto(b)
+62.41   File "/usr/local/lib/python3.9/http/client.py", line 507, in readinto
+62.41     n = self.fp.readinto(b)
+62.41   File "/usr/local/lib/python3.9/socket.py", line 716, in readinto
+62.41     return self._sock.recv_into(b)
+62.41   File "/usr/local/lib/python3.9/ssl.py", line 1275, in recv_into
+62.41     return self.read(nbytes, buffer)
+62.41   File "/usr/local/lib/python3.9/ssl.py", line 1133, in read
+62.41     return self._sslobj.read(len, buffer)
+62.41 socket.timeout: The read operation timed out
+62.41 
+62.41 During handling of the above exception, another exception occurred:
+62.41 
+62.41 Traceback (most recent call last):
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_internal/cli/base_command.py", line 160, in exc_logging_wrapper
+62.41     status = run_func(*args)
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_internal/cli/req_command.py", line 247, in wrapper
+62.41     return func(self, options, args)
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_internal/commands/install.py", line 419, in run
+62.41     requirement_set = resolver.resolve(
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_internal/resolution/resolvelib/resolver.py", line 92, in resolve
+62.41     result = self._result = resolver.resolve(
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_vendor/resolvelib/resolvers.py", line 481, in resolve
+62.41     state = resolution.resolve(requirements, max_rounds=max_rounds)
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_vendor/resolvelib/resolvers.py", line 348, in resolve
+62.41     self._add_to_criteria(self.state.criteria, r, parent=None)
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_vendor/resolvelib/resolvers.py", line 172, in _add_to_criteria
+62.41     if not criterion.candidates:
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_vendor/resolvelib/structs.py", line 151, in __bool__
+62.41     return bool(self._sequence)
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_internal/resolution/resolvelib/found_candidates.py", line 155, in __bool__
+62.41     return any(self)
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_internal/resolution/resolvelib/found_candidates.py", line 143, in <genexpr>
+62.41     return (c for c in iterator if id(c) not in self._incompatible_ids)
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_internal/resolution/resolvelib/found_candidates.py", line 47, in _iter_built
+62.41     candidate = func()
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_internal/resolution/resolvelib/factory.py", line 206, in _make_candidate_from_link
+62.41     self._link_candidate_cache[link] = LinkCandidate(
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_internal/resolution/resolvelib/candidates.py", line 297, in __init__
+62.41     super().__init__(
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_internal/resolution/resolvelib/candidates.py", line 162, in __init__
+62.41     self.dist = self._prepare()
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_internal/resolution/resolvelib/candidates.py", line 231, in _prepare
+62.41     dist = self._prepare_distribution()
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_internal/resolution/resolvelib/candidates.py", line 308, in _prepare_distribution
+62.41     return preparer.prepare_linked_requirement(self._ireq, parallel_builds=True)
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_internal/operations/prepare.py", line 491, in prepare_linked_requirement
+62.41     return self._prepare_linked_requirement(req, parallel_builds)
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_internal/operations/prepare.py", line 536, in _prepare_linked_requirement
+62.41     local_file = unpack_url(
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_internal/operations/prepare.py", line 166, in unpack_url
+62.41     file = get_http_url(
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_internal/operations/prepare.py", line 107, in get_http_url
+62.41     from_path, content_type = download(link, temp_dir.path)
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_internal/network/download.py", line 147, in __call__
+62.41     for chunk in chunks:
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_internal/cli/progress_bars.py", line 53, in _rich_progress_bar
+62.41     for chunk in iterable:
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_internal/network/utils.py", line 63, in response_chunks
+62.41     for chunk in response.raw.stream(
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_vendor/urllib3/response.py", line 622, in stream
+62.41     data = self.read(amt=amt, decode_content=decode_content)
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_vendor/urllib3/response.py", line 587, in read
+62.41     raise IncompleteRead(self._fp_bytes_read, self.length_remaining)
+62.41   File "/usr/local/lib/python3.9/contextlib.py", line 137, in __exit__
+62.41     self.gen.throw(typ, value, traceback)
+62.41   File "/usr/local/lib/python3.9/site-packages/pip/_vendor/urllib3/response.py", line 443, in _error_catcher
+62.41     raise ReadTimeoutError(self._pool, None, "Read timed out.")
+62.41 pip._vendor.urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='files.pythonhosted.org', port=443): Read timed out.
+------
+failed to solve: process "/bin/sh -c pip install mysql-connector-python" did not complete successfully: exit code: 2
+root@gosorio-X505BA:/home/gosorio/Votaciones/voting_app# 
+
