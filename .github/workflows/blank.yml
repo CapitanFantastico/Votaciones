@@ -27,7 +27,7 @@ jobs:
     steps:
       - name: "Paso 1: Saludando"
         run: echo "Hola mundo"
-        - name: "Paso 2: Mostrando variables de entorno"
+      - name: "Paso 2: Mostrando variables de entorno"
         run: |
           echo "Platform: ${{ env.platform }}" 
           echo "Region: ${{ env.region }}"
